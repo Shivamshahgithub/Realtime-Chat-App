@@ -1,0 +1,16 @@
+<h1>{{ group.name }}</h1>
+<div id="chat_window">
+    <ul>
+        {% for message in messages %}
+        <li>
+            <strong>{{ message.author.username }}:</strong> {{ message.body }}
+            <small>{{ message.timestamp }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<form method="POST" action="{% url 'send_message' group.name %}">
+    {% csrf_token %}
+    <input type="text" name="message" placeholder="Type your message here">
+    <button type="submit">Send</button>
+</form>
